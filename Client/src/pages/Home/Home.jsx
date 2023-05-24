@@ -1,4 +1,7 @@
-import styles from "./Home.module.css"
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { getAllDogs } from "../../redux/actions/actions";
+import styles from "./Home.module.css";
 
 import Cards from "../../components/Cards/Cards";
 import Pagination from "../../components/Pagination/Pagination";
@@ -13,14 +16,20 @@ const Home = ({
   currentDogs,
   paginate,
   orderBy,
-  filter
+  filter,
 }) => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllDogs());
+  }, [allDogs, dispatch])
+
   return (
     <div className={styles.container}>
       <div className={styles.box}>
         <div className={styles.flexFilter}>
           <OrderBy orderBy={orderBy} />
-          <Filter filter={filter} paginate={paginate}/>
+          <Filter filter={filter} paginate={paginate} />
         </div>
         <div className={styles.FlexCard}>
           <Cards dogs={currentDogs} />
