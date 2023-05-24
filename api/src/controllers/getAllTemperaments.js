@@ -5,10 +5,7 @@ const getAllTemperaments = async () => {
   let allTemperaments = [];
   const apiInfo = await getAllDogsApi();
 
-  let allTemp = apiInfo
-    .map((dog) => dog.temperament)
-    .join(", ")
-    .split(", ");
+  let allTemp = apiInfo.map((dog) => dog.temperament).join(", ").split(", ");
 
   allTemp.forEach((el) => {
     if (!allTemperaments.includes(el)) allTemperaments.push(el);

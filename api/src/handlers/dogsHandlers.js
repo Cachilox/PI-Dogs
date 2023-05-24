@@ -50,7 +50,7 @@ const createDogsHandler = async (req, res) => {
       weightMax,
       lifeSpanMin,
       lifeSpanMax,
-      temperament
+      temperament,
     );
 
     return res.status(201).json(newDog);
