@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { postDog } from "../../redux/actions/actions";
 import styles from "./Form.module.css";
 import validation from "../../utils/validation";
+import back_icon from "../../assets/back-icon.svg"
 
 const Form = () => {
   const dispatch = useDispatch();
@@ -114,7 +115,9 @@ const Form = () => {
     >
       <div className={styles.back}>
         <Link to="/home">
-          <button className={styles.backBtn}>🡰</button>
+          <button className={styles.backBtn}>
+            <img width={30} src={back_icon} alt="back_icon" />
+          </button>
         </Link>
       </div>
       <h1>CREATE BREED</h1>

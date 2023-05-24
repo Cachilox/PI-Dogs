@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { details, cleanDetail } from "../../redux/actions/actions";
 import { useDispatch, useSelector } from "react-redux";
+import back_icon from "../../assets/back-icon.svg"
 
 import styles from "./DogDetail.module.css";
 import {
@@ -28,7 +29,9 @@ const DogDetail = () => {
     <div className="container">
       <div className={styles.back}>
         <Link to="/home">
-          <button className={styles.backDetail}>🡰</button>
+          <button className={styles.backDetail}>
+            <img width={30} src={back_icon} alt="back icon" />
+          </button>
         </Link>
       </div>
       <div className={styles.detail}>

@@ -2,6 +2,7 @@ import styles from "./Filter.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import { searchTemperament } from "../../redux/actions/actions";
+import reset_icon from "../../assets/reset-icon.svg"
 
 const Filter = ({ filter, paginate }) => {
   const dispatch = useDispatch();
@@ -22,11 +23,9 @@ const Filter = ({ filter, paginate }) => {
     paginate(1);
   };
 
-  const handleReset = (e) => {
-    if (e.target.name === "temperament") {
-      setChecksTemperaments([]);
-      filter("Temperamets", []);
-    }
+  const handleReset = () => {
+    setChecksTemperaments([]);
+    filter("Temperamets", []);
   };
 
   const handleFilterCreated = (e) => {
@@ -52,7 +51,7 @@ const Filter = ({ filter, paginate }) => {
             name="temperament"
             className={styles.reset}
           >
-            ⭯
+            <img width={20} src={reset_icon} alt="reset icon" />
           </button>
         </div>
         <section>
@@ -96,13 +95,13 @@ const Filter = ({ filter, paginate }) => {
           <option disabled value={"DEFAULT"}>
             Filter by created
           </option>
-          <option key={1} value="all">
+          <option value="all">
             All
           </option>
-          <option key={2} value="created">
+          <option value="created">
             Created
           </option>
-          <option key={3} value="api">
+          <option value="api">
             Api
           </option>
         </select>

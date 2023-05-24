@@ -1,4 +1,4 @@
-import searchIcon from "../../assets/lupa.svg";
+import searchIcon from "../../assets/loupe-icon.svg";
 import closeIcon from "../../assets/close-icon.png";
 import "./SearchBar.css";
 import { useState } from "react";

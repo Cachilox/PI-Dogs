@@ -1,6 +1,5 @@
 import { ActionTypes } from "../action-types/action-types";
 import axios from "axios";
-// const URL_BASE = "http://localhost:3001/";
 
 export const details = (detailID) => {
   return async (dispatch) => {

@@ -57,6 +57,7 @@ input[type="checkbox"] {
   font-size: 12px;
   border: none;
   outline: none;
+  background: transparent;
 }
 .section section::-webkit-scrollbar {
   -webkit-appearance: none;
@@ -66,7 +67,7 @@ input[type="checkbox"] {
 }
 
 .section section::-webkit-scrollbar-thumb {
-  background-color: rgb(236, 151, 82);
+  background-color: #E6B325;
   border-radius: 20px;
   border: 2px solid #f1f2f3;
   height: 30px;
@@ -78,10 +79,8 @@ input[type="checkbox"] {
 
 .reset {
   cursor: pointer;
-  color: black;
-  float: left;
   text-decoration: none;
-  background-color: rgb(236, 151, 82);
+  background-color: rgb(235, 134, 51);
   border: 0px;
   height: 25px;
   width: 30px;
