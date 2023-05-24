@@ -1,0 +1,72 @@
+.landingContainer {
+  width: 100%;
+  height: 100vh;
+  background: url("../../assets/dog-background.jpg") center center / cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  font-size: 2.4rem;
+  color: #DA8858;
+  text-align: center;
+}
+
+.logo {
+  width: 16.5rem;
+  display: block;
+  margin: auto;
+}
+
+.home {
+  display: block;
+  margin: auto;
+  text-align: center;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-size: 20px;
+  letter-spacing: 3px;
+  position: relative;
+  background-color: #F0997A;
+  border: none;
+  color: #fff;
+  padding: 1rem;
+  width: 10rem;
+  transition-duration: 0.4s;
+  overflow: hidden;
+  box-shadow: 0 3px 8px #455A64;
+  border-radius: 4px;
+}
+
+.home:hover {
+  background: #d5d7daef;
+  box-shadow: 0px 2px 10px 5px #455A64;
+  color: #000;
+}
+
+@media screen and (min-width: 1024px) {
+  .landingContainer {
+    background-image: url("../../assets/dog-background.jpg");
+    background-size : cover;
+    background-position: top center;
+  }
+  .title {
+    font-size: 3.5rem;
+    background-color: #DA8858;
+    color: #f5f6f7;
+    padding: 0.3rem;
+    border-radius: 10px;
+    transition: color 0.2s ease;
+    text-align: center;
+  }
+  .title:hover {
+    color: #111;
+  }
+  .logo {
+    width: 24rem;
+  }
+  .home {
+    width: 12rem;
+  }
+}

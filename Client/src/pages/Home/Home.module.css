@@ -1,0 +1,31 @@
+.container {
+  max-width: 1300px;
+  min-height: 100vh;
+  margin: 5rem auto 1rem;
+  padding: 1em;
+}
+
+.flexFilter {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.FlexCard {
+  display: block;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .box {
+    display: flex;
+    justify-content: space-between;
+  }
+  .flexFilter {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    margin-top: 0.65rem;
+    gap: 1.7rem;
+  }
+}

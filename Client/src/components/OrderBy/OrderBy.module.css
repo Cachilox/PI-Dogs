@@ -1,0 +1,33 @@
+.orderContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #FFF7D4;
+  height: 240px;
+  width: 150px;
+  background-color: #A47E3B;
+  border-radius: 10px;
+  padding: 5px;
+  justify-content: space-evenly;
+}
+
+.orderContainer select {
+  margin: 12px;
+  height: 25px;
+  font-size: 14px;
+  border: 1px solid rgba(87, 54, 16, 0.9);
+  border-radius: 5px;
+  transition: 0.5s ease;
+  background-color: #FFF7D4;
+}
+
+.orderContainer span {
+  font-size: 17px;
+  font-weight: 500;
+}
+
+@media (min-width: 768px) {
+  .orderContainer {
+    width: 185px;
+  }
+}

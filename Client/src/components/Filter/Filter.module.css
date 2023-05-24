@@ -1,0 +1,102 @@
+.filterContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #FFF7D4;
+  height: auto;
+  width: 150px;
+  background-color: #A47E3B;
+  border-radius: 10px;
+  padding: 5px;
+  justify-content: space-evenly;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  padding: 2%;
+  height: 30px;
+  width: 90%;
+  color: #503101;
+  background-color: rgb(255, 237, 214);
+  border-radius: 10px;
+  scroll-snap-align: start;
+  margin: 12px 0 12px;
+  transition: 0.5s ease;
+}
+.section:hover{
+  height: 200px;
+}
+
+.section section {
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+}
+
+.filterContainer span {
+  margin-top: 3px;
+  font-size: 19px;
+}
+.section span {
+  font-size: 12px;
+  margin-left: 5px;
+}
+.section div {
+  display: flex;
+  align-items: center;
+}
+input[type="checkbox"] {
+  width: 15px;
+  margin: 0px;
+  cursor: pointer;
+}
+
+.searchTemp {
+  width: 100%;
+  margin: 0px;
+  font-size: 12px;
+  border: none;
+  outline: none;
+}
+.section section::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width:15px;
+  background-color: rgb(230, 196, 152);
+  border-radius: 10px;
+}
+
+.section section::-webkit-scrollbar-thumb {
+  background-color: rgb(236, 151, 82);
+  border-radius: 20px;
+  border: 2px solid #f1f2f3;
+  height: 30px;
+}
+.selectFilter {
+  margin: 12px;
+  height: 25px;
+}
+
+.reset {
+  cursor: pointer;
+  color: black;
+  float: left;
+  text-decoration: none;
+  background-color: rgb(236, 151, 82);
+  border: 0px;
+  height: 25px;
+  width: 30px;
+  border-radius: 5px;
+  font-weight: bold;
+  margin-left: 2px;
+  transition: 0.5s ease;
+}
+
+.reset:hover {
+  background-color: rgb(255, 201, 167);
+}
+
+@media (min-width: 768px) {
+  .filterContainer {
+    width: 185px;
+  }
+}

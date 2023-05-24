@@ -1,0 +1,30 @@
+.footer {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  height: auto;
+  margin-top: 20px;
+  background-color: #61481C;
+  color: rgb(245, 244, 244);
+}
+
+.social_links {
+  display: flex;
+  justify-content: center;
+}
+
+.social_links img {
+  height: 32px;
+  width: 32px;
+  background-color: #fff;
+  border: 1px solid #fff;
+  margin: 5px 7px 5px 7px;
+  border-radius: 5px;
+}
+
+.copy{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  font-size: 14px;
+}
