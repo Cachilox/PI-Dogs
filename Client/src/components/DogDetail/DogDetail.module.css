@@ -70,6 +70,9 @@
 }
 
 @media (min-width: 768px) {
+  .containerDetail {
+    min-height: 80vh;
+  }
   .detail {
     display: flex;
     flex-direction: row;
@@ -102,6 +105,9 @@
 }
 
 @media (min-width: 1024px) {
+  .containerDetail {
+    min-height: 100vh;
+  }
   .detail {
     display: flex;
     width: 100%;
@@ -133,7 +139,7 @@
     height: 210px;
     color: #BF9742;
     line-height: 1.5em;
-    font-size: 15px;
+    font-size: 1.2rem;
     overflow: hidden;
   }
   .detail_data {
@@ -168,5 +174,11 @@
     width: 100%;
     object-fit: cover;
     border-radius: 5px 0 0 5px;
+  }
+  .detail_temperament h4 {
+    font-size: 1.5rem;
+  }
+  .detail_temperament span {
+    font-size: 1.3rem;
   }
 }

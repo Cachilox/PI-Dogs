@@ -72,3 +72,14 @@ input[type="search"]::-moz-clear {
   -moz-appearance: none;
   appearance: none;
 }
+
+@media (min-width: 320px) {
+  .searchBox input {
+    font-size: 0.88em;
+  }
+}
+@media (min-width: 768px) {
+  .searchBox input {
+    font-size: 1em;
+  }
+}

@@ -85,11 +85,19 @@ export const getAllDogs = () => {
 
 export const getByBreed = (breed) => {
   return async (dispatch) => {
-    const { data } = await axios(`dogs?name=${breed}`);
-    dispatch({
-      type: ActionTypes.GET_BY_BREED,
-      payload: data,
-    });
+    try {
+      const { data } = await axios(`dogs?name=${breed}`);
+      if (data.length === 0) {
+        alert("this dog not exist")
+        return
+      }
+      dispatch({
+        type: ActionTypes.GET_BY_BREED,
+        payload: data,
+      });
+    } catch (error) {
+      console.error(error);
+    }
   };
 };
 

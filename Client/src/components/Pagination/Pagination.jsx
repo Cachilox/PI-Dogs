@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styles from "./Pagination.module.css";
+import reset_icon from "../../assets/reset-icon.svg"
 
 const Pagination = ({
   dogsPerPage,
@@ -77,7 +78,9 @@ const Pagination = ({
         readOnly
       />
       <p onClick={handleForward}>&raquo;</p>
-      <p onClick={handleReset}>⭯</p>
+      <p onClick={handleReset}>
+        <img className={styles.reset_icon} width={20} src={reset_icon} alt="reset icon" />
+      </p>
     </div>
   );
 };

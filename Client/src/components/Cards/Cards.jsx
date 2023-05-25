@@ -1,7 +1,5 @@
 import Card from "../Card/Card";
 
-import React from "react";
-
 const Cards = ({ dogs }) => {
   return (
     <div className="Cards-container">

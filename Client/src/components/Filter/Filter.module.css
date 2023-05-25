@@ -11,6 +11,10 @@
   justify-content: space-evenly;
 }
 
+.filterContainer section select {
+  background-color: #FFF7D4;
+}
+
 .section {
   display: flex;
   flex-direction: column;

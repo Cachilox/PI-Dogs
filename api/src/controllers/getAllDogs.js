@@ -79,7 +79,7 @@ const getAllDogs = async (name) => {
     oneDog = getAllDogs.filter((dog) =>
       dog.name.toLowerCase().includes(name.toLowerCase())
     );
-    if (oneDog.length === 0) return "No dogs with that name found";
+    // if (oneDog.length === 0) return "No dogs with that name found";
     return oneDog;
   }
   return await getAllDogs;

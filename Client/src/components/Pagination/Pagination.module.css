@@ -10,6 +10,7 @@
 .pagination p{
   cursor: pointer;
   color: #111;
+  font-size: 1.2em;
   padding: 8px 16px;
   background-color: #BF9742;
   border-radius: 5px;
@@ -19,6 +20,10 @@
 }
 .pagination p:nth-child(5) {
   margin: 0;
+}
+.pagination p img {
+  display: flex;
+  align-items: center;
 }
 
 .pagination p:hover {
@@ -33,6 +38,10 @@
   font-size: 1.3rem;
   margin-left: 10px;
   outline: none;
+  transition: border 0.3s ease;
+}
+.inputP:hover {
+  border: 2px solid #9a92a0;
 }
 
 @media (min-width: 320px) {

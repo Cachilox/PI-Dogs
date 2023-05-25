@@ -4,7 +4,7 @@ import { useState } from "react";
 import { searchTemperament } from "../../redux/actions/actions";
 import reset_icon from "../../assets/reset-icon.svg"
 
-const Filter = ({ filter, paginate }) => {
+const Filter = ({ filter, paginate, allDogs }) => {
   const dispatch = useDispatch();
   const temperaments = useSelector((state) => state.temperaments);
   const [checksTemperaments, setChecksTemperaments] = useState([]);
@@ -26,6 +26,7 @@ const Filter = ({ filter, paginate }) => {
   const handleReset = () => {
     setChecksTemperaments([]);
     filter("Temperamets", []);
+    allDogs()
   };
 
   const handleFilterCreated = (e) => {
