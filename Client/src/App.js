@@ -19,7 +19,7 @@ import Form from "./pages/Form/Form";
 import DogDetail from "./components/DogDetail/DogDetail";
 import Footer from "./components/Footer/Footer";
 import axios from "axios";
-axios.defaults.baseURL = "http://localhost:3001/"
+axios.defaults.baseURL = "https://pi-dogs-production-0391.up.railway.app/"
 
 function App() {
   const [currentPage, setCurrentPage] = useState(1);
