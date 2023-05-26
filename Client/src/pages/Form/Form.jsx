@@ -36,15 +36,20 @@ const Form = () => {
   }, [errors]);
 
   const handleTemperaments = (e) => {
-    const { value } = e.target;
-    let updateList = [...dogTemperaments];
-    if (e.target.checked) {
-      updateList = [...dogTemperaments, value];
+    const { value, checked } = e.target;
+  
+    let updatedTemperaments = [...dogTemperaments];
+  
+    if (checked) {
+      updatedTemperaments = [...dogTemperaments, value];
     } else {
-      updateList.splice(dogTemperaments.indexOf(value), 1);
+      updatedTemperaments = dogTemperaments.filter(
+        (temperament) => temperament !== value
+      );
     }
-    setDogTemperament(updateList);
-    setErrors(validation(dogData, updateList));
+  
+    setDogTemperament(updatedTemperaments);
+    setErrors(validation(dogData, updatedTemperaments));
   };
 
   const handleInputChange = (e) => {
@@ -80,6 +85,7 @@ const Form = () => {
           lifeSpanMax: dogData.lifeSpanMax,
           temperament: dogTemperaments,
         };
+        console.log(dog.temperament);
 
         dispatch(postDog(dog));
 
@@ -246,7 +252,7 @@ const Form = () => {
                   value={e.name}
                   type="checkbox"
                 ></input>
-                <span>{e.name ? e.name : "undefined"}</span>
+                <span>{e.name}</span>
               </div>
             );
           })}

@@ -28,3 +28,8 @@ export const getLifeSpanText = (lifeSpanMin, lifeSpanMax) => {
   }
 }
 
+export const getTempText = (temperament) => {
+  let temp = temperament?.split(",");
+  let tempTxt = temp?.join(", ");
+  return tempTxt
+}

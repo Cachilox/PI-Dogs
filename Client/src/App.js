@@ -19,7 +19,7 @@ import Form from "./pages/Form/Form";
 import DogDetail from "./components/DogDetail/DogDetail";
 import Footer from "./components/Footer/Footer";
 import axios from "axios";
-axios.defaults.baseURL = "https://pi-dogs-production-0391.up.railway.app/"
+axios.defaults.baseURL = "http://localhost:3001/"
 
 function App() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -40,14 +40,19 @@ function App() {
     dispatch(getAllDogs());
   }, [dispatch]);
 
+  const allTemps = useCallback(() => {
+    dispatch(getTemperaments());
+  }, [dispatch])
+
   const onSearch = (race) => {
     dispatch(getByBreed(race));
   };
 
   useEffect(() => {
-    dispatch(getTemperaments());
+    // dispatch(getTemperaments());
+    allTemps()
     allDogs();
-  }, [allDogs, dispatch]);
+  }, [allDogs, allTemps]);
 
   const orderBy = (name, value) => {
     if (name === "Alphabetic") {
@@ -83,6 +88,7 @@ function App() {
               allDogs={allDogs}
               orderBy={orderBy}
               filter={filter}
+              allTemps={allTemps}
             />
           }
         />

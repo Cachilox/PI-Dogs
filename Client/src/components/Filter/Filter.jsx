@@ -1,17 +1,20 @@
 import styles from "./Filter.module.css";
 import { useSelector, useDispatch } from "react-redux";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { searchTemperament } from "../../redux/actions/actions";
 import reset_icon from "../../assets/reset-icon.svg"
 
-const Filter = ({ filter, paginate, allDogs }) => {
+const Filter = ({ filter, paginate, allDogs, allTemps }) => {
   const dispatch = useDispatch();
   const temperaments = useSelector((state) => state.temperaments);
+  const [searchTemp, setSearchTemp] = useState("")
+
   const [checksTemperaments, setChecksTemperaments] = useState([]);
 
-  const handleSearchTemp = (event) => {
-    dispatch(searchTemperament(event.target.value));
-  };
+
+  useEffect(() => {
+    dispatch(searchTemperament(searchTemp));
+  }, [dispatch, searchTemp]);
 
   const handleChecksTemp = (e) => {
     const { checked, value } = e.target;
@@ -24,8 +27,13 @@ const Filter = ({ filter, paginate, allDogs }) => {
   };
 
   const handleReset = () => {
+    document
+    .querySelectorAll("input[type=checkbox]")
+    .forEach((el) => (el.checked = false));
     setChecksTemperaments([]);
+    setSearchTemp("")
     filter("Temperamets", []);
+    allTemps()
     allDogs()
   };
 
@@ -44,8 +52,9 @@ const Filter = ({ filter, paginate, allDogs }) => {
           <input
             className={styles.searchTemp}
             placeholder="Search temperaments"
+            value={searchTemp}
             type="search"
-            onChange={handleSearchTemp}
+            onChange={(e) => setSearchTemp(e.target.value)}
           />
           <button
             onClick={handleReset}
@@ -61,11 +70,11 @@ const Filter = ({ filter, paginate, allDogs }) => {
               return (
                 <div key={temp.id}>
                   <input
-                    onChange={(e) => handleChecksTemp(e)}
+                    onChange={handleChecksTemp}
                     key={temp.id}
                     value={temp.name}
                     type="checkbox"
-                    checked={checksTemperaments.includes(temp.name)}
+                    checked
                   ></input>
                   <span>{temp.name}</span>
                 </div>
@@ -74,7 +83,7 @@ const Filter = ({ filter, paginate, allDogs }) => {
               return (
                 <div key={temp.id}>
                   <input
-                    onChange={(e) => handleChecksTemp(e)}
+                    onChange={handleChecksTemp}
                     key={temp.id}
                     value={temp.name}
                     type="checkbox"

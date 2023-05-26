@@ -12,6 +12,7 @@ import {
   getHeightText,
   getWeightText,
   getLifeSpanText,
+  getTempText
 } from "../../utils/formatText";
 
 const DogDetail = () => {
@@ -29,6 +30,7 @@ const DogDetail = () => {
   let heightTxt = getHeightText(detail.heightMin, detail.heightMax);
   let weightTxt = getWeightText(detail.weightMin, detail.weightMax);
   let lifeSpanTxt = getLifeSpanText(detail.lifeSpanMin, detail.lifeSpanMax);
+  let tempTxt = getTempText(detail?.temperament)
 
   return (
     <div className={`container ${styles.containerDetail}`}>
@@ -70,7 +72,7 @@ const DogDetail = () => {
                 </div>
                 <div className={styles.detail_temperament}>
                   <h4>Temperament:</h4>
-                  <span className="temperament-tag">{detail.temperament}</span>
+                  <span className="temperament-tag">{tempTxt}</span>
                 </div>
               </div>
             </div>

@@ -20,6 +20,7 @@ const Home = ({
   paginate,
   orderBy,
   filter,
+  allTemps
 }) => {
   const {loading} = useLoading()
 
@@ -34,7 +35,7 @@ const Home = ({
       <div className={styles.box}>
         <div className={styles.flexFilter}>
           <OrderBy orderBy={orderBy} />
-          <Filter filter={filter} paginate={paginate} allDogs={allDogs} />
+          <Filter filter={filter} paginate={paginate} allDogs={allDogs} allTemps={allTemps} />
         </div>
         <div className={styles.FlexCard}>
           {loading ? <Loading /> : <Cards dogs={currentDogs} />}

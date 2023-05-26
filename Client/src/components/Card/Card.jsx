@@ -1,11 +1,10 @@
 import { Link } from "react-router-dom";
 import styles from "./Card.module.css";
-import { getWeightText } from "../../utils/formatText";
+import { getWeightText, getTempText } from "../../utils/formatText";
 
 const Card = ({ id, name, image, temperament, weightMin, weightMax }) => {
 
-  // let temp = temperament?.split(",")?.slice(0, 3);
-  // let tempTxT = temp?.join(", ");
+  let tempTxt = getTempText(temperament);
   let weightTxt = getWeightText(weightMin, weightMax);
 
   return (
@@ -18,7 +17,7 @@ const Card = ({ id, name, image, temperament, weightMin, weightMax }) => {
 
           <div className={styles.card_body}>
             <h3>{name}</h3>
-            <p>{temperament}</p> 
+            <p>{tempTxt}</p> 
           </div>
 
           <div className={styles.card_footer}>
