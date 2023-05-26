@@ -85,7 +85,6 @@ const Form = () => {
           lifeSpanMax: dogData.lifeSpanMax,
           temperament: dogTemperaments,
         };
-        console.log(dog.temperament);
 
         dispatch(postDog(dog));
 

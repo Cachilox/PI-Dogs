@@ -9,6 +9,9 @@
   color: #61481C;
   overflow: hidden;
 }
+.containerDetail {
+  min-height: 80vh;
+}
 
 .backDetail {
   display: flex;
