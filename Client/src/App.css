@@ -11,3 +11,10 @@
   margin: 5rem auto 1rem;
   padding: 1em;
 }
+
+.toast {
+  max-width: 320px;
+  min-width: 80px;
+  display: flex;
+  justify-content: center;
+}

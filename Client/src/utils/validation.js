@@ -15,8 +15,6 @@ const validation = (dogData, dogTemperaments) => {
     errors.lifeSpan = "Please enter both values";
   } else if (parseInt(dogData.lifeSpanMin) > parseInt(dogData.lifeSpanMax)) {
     errors.lifeSpan = "Min life span must be less than max life span";
-  } else if (!dogData.image) {
-    errors.image = "Please enter a value";
   } else if (dogTemperaments.length === 0) {
     errors.temperaments = "Please select at least one dog temperament";
   }

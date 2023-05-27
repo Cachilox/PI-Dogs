@@ -1,16 +1,16 @@
 import "./App.css";
-import { useState, useEffect, useCallback } from "react";
+import { useEffect, useCallback } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   getAllDogs,
   getTemperaments,
   getByBreed,
   orderByAlphabet,
   orderWeight,
-  filterByTemperament,
-  filterCreated
 } from "./redux/actions/actions";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import Landing from "./pages/Landing/Landing";
 import Home from "./pages/Home/Home";
@@ -19,22 +19,14 @@ import Form from "./pages/Form/Form";
 import DogDetail from "./components/DogDetail/DogDetail";
 import Footer from "./components/Footer/Footer";
 import axios from "axios";
+import NotFound from "./components/NotFound/NotFound";
 axios.defaults.baseURL = "https://pi-dogs-production-0391.up.railway.app/"
 
 function App() {
-  const [currentPage, setCurrentPage] = useState(1);
-  const [dogsPerPage] = useState(8);
-
   const dispatch = useDispatch();
-  const dogs = useSelector((state) => state.dogs);
 
   const location = useLocation();
   const show = location.pathname !== "/";
-
-  const indexOfLastDog = currentPage * dogsPerPage;
-  const indexOfFirstDog = indexOfLastDog - dogsPerPage;
-  const currentDogs = dogs.slice(indexOfFirstDog, indexOfLastDog);
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const allDogs = useCallback(() => {
     dispatch(getAllDogs());
@@ -42,15 +34,14 @@ function App() {
 
   const allTemps = useCallback(() => {
     dispatch(getTemperaments());
-  }, [dispatch])
+  }, [dispatch]);
 
   const onSearch = (race) => {
     dispatch(getByBreed(race));
   };
 
   useEffect(() => {
-    // dispatch(getTemperaments());
-    allTemps()
+    allTemps();
     allDogs();
   }, [allDogs, allTemps]);
 
@@ -62,42 +53,27 @@ function App() {
     }
   };
 
-  const filter = (name, value) => {
-    if (name === "Temperaments") {
-      dispatch(filterByTemperament(value));
-    }else if(name === "FilterCreated") {
-      dispatch(filterCreated(value));
-    }
-  };
-
   return (
-    <div className="App">
-      {show && <Navbar onSearch={onSearch} paginate={paginate} />}
-      <Routes>
-        <Route path="/" element={<Landing />} />
+    <>
+      {show && <Navbar onSearch={onSearch} />}
+      <main>
+        <Routes>
+          <Route path="/" element={<Landing />} />
 
-        <Route
-          path="/home"
-          element={
-            <Home
-              currentPage={currentPage}
-              dogsPerPage={dogsPerPage}
-              currentDogs={currentDogs}
-              paginate={paginate}
-              dogs={dogs}
-              allDogs={allDogs}
-              orderBy={orderBy}
-              filter={filter}
-              allTemps={allTemps}
-            />
-          }
-        />
-        <Route path="/create" element={<Form />} />
-        <Route path="/detail/:id" element={<DogDetail />} />
-        <Route path="*" element={<h1>404 NOT FOUND</h1>} />
-      </Routes>
+          <Route
+            path="/home"
+            element={
+              <Home allDogs={allDogs} orderBy={orderBy} allTemps={allTemps} />
+            }
+          />
+          <Route path="/create" element={<Form />} />
+          <Route path="/detail/:id" element={<DogDetail />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+        <ToastContainer className="toast" />
+      </main>
       {show && <Footer />}
-    </div>
+    </>
   );
 }
 

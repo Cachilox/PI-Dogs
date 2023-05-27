@@ -126,7 +126,7 @@ const createDog = async (
     defaults: {
       id,
       name,
-      image,
+      image: image || "https://img.freepik.com/free-vector/cute-dog-waving-hand-cartoon-vector-icon-illustration-animal-nature-icon-concept-isolated-premium_138676-4955.jpg?w=2000",
       heightMin,
       heightMax,
       weightMin,

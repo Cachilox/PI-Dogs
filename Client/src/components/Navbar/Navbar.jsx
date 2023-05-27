@@ -3,11 +3,11 @@ import logo from "../../assets/dog.png";
 import SearchBar from "../SearchBar/SearchBar";
 import { Link } from "react-router-dom";
 
-const Navbar = ({ onSearch, paginate }) => {
+const Navbar = ({ onSearch }) => {
   return (
     <header className={styles.header}>
       <Link to="/home">
-        <img className={styles.logo_dog} src={logo} alt="dog logo" />
+        <img className={styles.logo_dog} width={72} src={logo} alt="dog logo" />
       </Link>
       <div>
         <Link to="/create">
@@ -15,7 +15,7 @@ const Navbar = ({ onSearch, paginate }) => {
         </Link>
       </div>
       <div className={styles.group}>
-        <SearchBar onSearch={onSearch} paginate={paginate} />
+        <SearchBar onSearch={onSearch} />
       </div>
     </header>
   );

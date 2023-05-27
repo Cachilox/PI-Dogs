@@ -1,5 +1,19 @@
 import { ActionTypes } from "../action-types/action-types";
 import axios from "axios";
+import { toast } from "react-toastify";
+
+const notify = (breed) => {
+  toast.warn(`${breed} the dog doesn't exist`, {
+    position: "bottom-right",
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
+  });
+};
 
 export const details = (detailID) => {
   return async (dispatch) => {
@@ -88,8 +102,8 @@ export const getByBreed = (breed) => {
     try {
       const { data } = await axios(`dogs?name=${breed}`);
       if (data.length === 0) {
-        alert("this dog not exist")
-        return
+        notify(breed);
+        return;
       }
       dispatch({
         type: ActionTypes.GET_BY_BREED,

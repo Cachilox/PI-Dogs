@@ -1,21 +1,27 @@
+import styles from "./Form.module.css";
+
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { postDog } from "../../redux/actions/actions";
-import styles from "./Form.module.css";
+
 import validation from "../../utils/validation";
-import back_icon from "../../assets/back-icon.svg"
+import back_icon from "../../assets/back-icon.svg";
+import FormData from "form-data";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const Form = () => {
   const dispatch = useDispatch();
   const temperaments = useSelector((state) => state.allTemperaments);
-  const navigate = useNavigate();
 
   const [isDisabled, setIsDisabled] = useState(false);
+  const [file, setFile] = useState(null);
+
   const [dogTemperaments, setDogTemperament] = useState([]);
+
   const [dogData, setDogData] = useState({
     name: "",
-    image: "",
     heightMin: "",
     heightMax: "",
     weightMin: "",
@@ -23,6 +29,19 @@ const Form = () => {
     lifeSpanMin: "",
     lifeSpanMax: "",
   });
+  const notify = () => {
+    toast.success("🐶 Raza de perro creada!", {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  };
+
   const [errors, setErrors] = useState({
     name: "",
     height: "",
@@ -37,9 +56,9 @@ const Form = () => {
 
   const handleTemperaments = (e) => {
     const { value, checked } = e.target;
-  
+
     let updatedTemperaments = [...dogTemperaments];
-  
+
     if (checked) {
       updatedTemperaments = [...dogTemperaments, value];
     } else {
@@ -47,9 +66,14 @@ const Form = () => {
         (temperament) => temperament !== value
       );
     }
-  
+
     setDogTemperament(updatedTemperaments);
     setErrors(validation(dogData, updatedTemperaments));
+  };
+
+  const handleImage = (e) => {
+    e.preventDefault();
+    setFile(e.target.files[0]);
   };
 
   const handleInputChange = (e) => {
@@ -74,9 +98,24 @@ const Form = () => {
 
     try {
       if (Object.keys(validation(dogData, dogTemperaments)).length === 0) {
+        let image = null;
+        if (file) {
+          const cloudinaryUrl =
+            "https://api.cloudinary.com/v1_1/dqiah55rm/image/upload";
+          const cloudinaryID = "icieqqlf";
+          const formData = new FormData();
+          formData.append("file", file);
+          formData.append("upload_preset", cloudinaryID);
+          const res = await axios.post(cloudinaryUrl, formData, {
+            header: {
+              "content-type": "multipart/form-data",
+            },
+          });
+          image = res.data.secure_url;
+        }
         const dog = {
           name: dogData.name,
-          image: dogData.image,
+          image,
           heightMin: dogData.heightMin,
           heightMax: dogData.heightMax,
           weightMin: dogData.weightMin,
@@ -85,13 +124,9 @@ const Form = () => {
           lifeSpanMax: dogData.lifeSpanMax,
           temperament: dogTemperaments,
         };
-
         dispatch(postDog(dog));
-
-        window.alert("Raza de perro creada");
         setDogData({
           name: "",
-          image: "",
           heightMin: "",
           heightMax: "",
           weightMin: "",
@@ -100,11 +135,14 @@ const Form = () => {
           lifeSpanMax: "",
         });
         setDogTemperament([]);
-      
+
         document
           .querySelectorAll("input[type=checkbox]")
           .forEach((el) => (el.checked = false));
-        navigate("/home");
+        document
+          .querySelectorAll("input[type=file]")
+          .forEach((el) => (el.value = null));
+        setFile(null);
       } else {
         window.alert("data is missing");
       }
@@ -228,15 +266,15 @@ const Form = () => {
         {errors.height || errors.weight || errors.lifeSpan}
       </p>
       <div className={styles.inputImage}>
-        <span>Imagen</span>
         <input
-          className={`${errors.image && styles.warning} ${styles.inputForm}`}
-          onChange={(e) => handleInputChange(e)}
-          type="text"
-          placeholder="URL"
-          value={dogData.image}
+          type="file"
+          onChange={handleImage}
+          accept="image/png, image/jpeg"
           name="image"
-        ></input>
+        />
+        {file ? (
+          <img width={250} alt="prewiew" src={URL.createObjectURL(file)} />
+        ) : null}
       </div>
       <p className={styles.error}> {errors.image}</p>
       <div className={styles.temperaments}>
@@ -263,6 +301,7 @@ const Form = () => {
         className={`${styles.button}`}
         type="submit"
         disabled={isDisabled}
+        onClick={notify}
       >
         Create dog
       </button>

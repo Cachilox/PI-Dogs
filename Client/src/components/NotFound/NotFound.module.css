@@ -1,0 +1,28 @@
+@media (min-width: 320px) {
+  .notfound {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 77vh;
+  }
+  .notfound_img{
+    width: 100%;
+    object-fit: cover;
+    display: block;
+    margin-top: 4rem;
+  }  
+}
+@media (min-width: 768px) {
+  .notfound {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+  }
+  .notfound_img{
+    width: 80%;
+    object-fit: cover;
+    display: block;
+    margin-top: 4rem;
+  }  
+}

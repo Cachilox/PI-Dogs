@@ -28,3 +28,12 @@
   height: 40px;
   font-size: 14px;
 }
+.copy span {
+  font-size: 15px;
+}
+
+@media (min-width: 768px) {
+  .copy span {
+    font-size: 1.2rem;
+  }
+}

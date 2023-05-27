@@ -81,9 +81,34 @@ span {
   font-weight: 500;
 }
 
-.inputImage span {
-  display: block;
-  text-align: center;
+.inputImage {
+  display: flex;
+  flex-direction: column;
+  margin: 2.3rem 2.3rem;
+}
+
+.inputImage input {
+  width: 320px;
+  font-size: 13px;
+  padding: 4px;
+  border-radius: 5px;
+  font-weight: bold;
+  box-shadow: 0 4px 6px 3px rgba(0, 0,0, 0.15);
+  color: rgb(77, 60, 0);
+  background-color: rgb(255, 237, 214);
+}
+
+.inputImage img {
+  width: 270px;
+  align-self: center;
+  height: auto;
+  margin-top: 1.2rem;
+  border-radius: 15px;
+  border: 2px solid white;
+  transition: border 0.2s ease;
+}
+.inputImage img:hover {
+  border: 2px solid rgb(200, 169, 54);
 }
 
 .temperaments {
@@ -115,9 +140,7 @@ span {
   overflow-y: scroll;
   border: 2px solid white;
   padding: 10px;
-}
-.section:hover {
-  border: 2px solid rgb(184, 184, 184);
+  transition: border 0.2s ease;
 }
 .section:hover {
   border: 2px solid rgb(200, 169, 54);
@@ -174,24 +197,13 @@ span {
   cursor: pointer;
 }
 
-.disabled_button {
-  background-color: #ccc;
-  color: #888;
-  cursor: not-allowed;
-  opacity: 0.5;
-  pointer-events: none;
-}
-.disabled_button:hover {
-  background-color: #ccc;
-  color: #888;
-}
-
 .error {
   display: block;
   text-align: center;
-  font-size: 12px;
+  font-size: 13px;
   color: rgb(255, 3, 3);
   transition: 0.5s ease;
+  margin-top: 10px;
 }
 
 .warning {
@@ -204,6 +216,7 @@ span {
 .number {
   width: 60px;
 }
+
 .warningNumber {
   width: 60px;
   margin: 15px;
@@ -216,6 +229,9 @@ span {
 }
 
 @media (min-width: 768px) {
+  .error {
+    font-size: 1rem;
+  }
   .box {
     flex-direction: column;
   }
@@ -252,5 +268,13 @@ span {
     overflow-y: scroll;
     border: 2px solid white;
     padding: 10px;
+  }
+  .inputImage input {
+    width: 26rem;
+    font-size: 1rem;
+    padding: 5px;
+  }
+  .inputImage img {
+    width: 19rem;
   }
 }

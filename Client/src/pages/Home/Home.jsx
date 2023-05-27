@@ -1,30 +1,30 @@
 import styles from "./Home.module.css";
 
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { getAllDogs } from "../../redux/actions/actions";
 import { useLoading } from "../../hooks/useLoading";
 
 import Cards from "../../components/Cards/Cards";
-import Pagination from "../../components/Pagination/Pagination";
+import Pagination from "../../components/Pagination/Pagination.jsx";
 import OrderBy from "../../components/OrderBy/OrderBy";
 import Filter from "../../components/Filter/Filter";
 import Loading from "../../components/Loading/Loading";
 
-const Home = ({
-  dogs,
-  allDogs,
-  currentPage,
-  dogsPerPage,
-  currentDogs,
-  paginate,
-  orderBy,
-  filter,
-  allTemps
-}) => {
-  const {loading} = useLoading()
-
+const Home = ({ allDogs, orderBy, allTemps }) => {
+  const { loading } = useLoading();
   const dispatch = useDispatch();
+  const dogs = useSelector((state) => state.dogs);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [dogsPerPage] = useState(8);
+
+  const indexOfLastDog = currentPage * dogsPerPage;
+  const indexOfFirstDog = indexOfLastDog - dogsPerPage;
+  const currentDogs = dogs.slice(indexOfFirstDog, indexOfLastDog);
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  const [checksTemperaments, setChecksTemperaments] = useState([]);
 
   useEffect(() => {
     dispatch(getAllDogs());
@@ -35,7 +35,13 @@ const Home = ({
       <div className={styles.box}>
         <div className={styles.flexFilter}>
           <OrderBy orderBy={orderBy} />
-          <Filter filter={filter} paginate={paginate} allDogs={allDogs} allTemps={allTemps} />
+          <Filter
+            paginate={paginate}
+            allDogs={allDogs}
+            allTemps={allTemps}
+            setChecksTemperaments={setChecksTemperaments}
+            checksTemperaments={checksTemperaments}
+          />
         </div>
         <div className={styles.FlexCard}>
           {loading ? <Loading /> : <Cards dogs={currentDogs} />}
@@ -44,9 +50,11 @@ const Home = ({
       <Pagination
         dogsPerPage={dogsPerPage}
         totalDogs={dogs.length}
-        paginate={paginate}
         currentPage={currentPage}
         allDogs={allDogs}
+        paginate={paginate}
+        checksTemperaments={checksTemperaments}
+        setChecksTemperaments={setChecksTemperaments}
       />
     </div>
   );

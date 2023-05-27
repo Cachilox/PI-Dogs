@@ -1,16 +1,23 @@
 import styles from "./Filter.module.css";
 import { useSelector, useDispatch } from "react-redux";
+import {
+  filterByTemperament,
+  filterCreated,
+} from "../../redux/actions/actions";
 import { useState, useEffect } from "react";
 import { searchTemperament } from "../../redux/actions/actions";
-import reset_icon from "../../assets/reset-icon.svg"
+import reset_icon from "../../assets/reset-icon.svg";
 
-const Filter = ({ filter, paginate, allDogs, allTemps }) => {
+const Filter = ({
+  paginate,
+  allDogs,
+  allTemps,
+  checksTemperaments,
+  setChecksTemperaments,
+}) => {
   const dispatch = useDispatch();
   const temperaments = useSelector((state) => state.temperaments);
-  const [searchTemp, setSearchTemp] = useState("")
-
-  const [checksTemperaments, setChecksTemperaments] = useState([]);
-
+  const [searchTemp, setSearchTemp] = useState("");
 
   useEffect(() => {
     dispatch(searchTemperament(searchTemp));
@@ -22,23 +29,23 @@ const Filter = ({ filter, paginate, allDogs, allTemps }) => {
       ? [...checksTemperaments, value]
       : checksTemperaments.filter((temp) => temp !== value);
     setChecksTemperaments(updateList);
-    filter("Temperaments", updateList);
+    dispatch(filterByTemperament(updateList));
     paginate(1);
   };
 
   const handleReset = () => {
     document
-    .querySelectorAll("input[type=checkbox]")
-    .forEach((el) => (el.checked = false));
+      .querySelectorAll("input[type=checkbox]")
+      .forEach((el) => (el.checked = false));
     setChecksTemperaments([]);
-    setSearchTemp("")
-    filter("Temperamets", []);
-    allTemps()
-    allDogs()
+    setSearchTemp("");
+    dispatch(filterByTemperament([]));
+    allTemps();
+    allDogs();
   };
 
   const handleFilterCreated = (e) => {
-    filter("FilterCreated", e.target.value);
+    dispatch(filterCreated(e.target.value));
     paginate(1);
   };
 
@@ -105,15 +112,9 @@ const Filter = ({ filter, paginate, allDogs, allTemps }) => {
           <option disabled value={"DEFAULT"}>
             Filter by created
           </option>
-          <option value="all">
-            All
-          </option>
-          <option value="created">
-            Created
-          </option>
-          <option value="api">
-            Api
-          </option>
+          <option value="all">All</option>
+          <option value="created">Created</option>
+          <option value="api">Api</option>
         </select>
       </section>
     </div>
