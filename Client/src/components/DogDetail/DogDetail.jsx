@@ -4,9 +4,9 @@ import { useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { details, cleanDetail } from "../../redux/actions/actions";
 import { useDispatch, useSelector } from "react-redux";
-import back_icon from "../../assets/back-icon.svg";
 import { useLoading } from "../../hooks/useLoading";
 import Loading from "../Loading/Loading";
+import {BiArrowBack} from "react-icons/bi"
 
 import {
   getHeightText,
@@ -41,7 +41,7 @@ const DogDetail = () => {
           <div className={styles.back}>
             <Link to="/home">
               <button className={styles.backDetail}>
-                <img width={30} src={back_icon} alt="back icon" />
+                <BiArrowBack className="arrowBack" />
               </button>
             </Link>
           </div>

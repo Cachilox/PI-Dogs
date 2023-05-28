@@ -3,10 +3,10 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   filterByTemperament,
   filterCreated,
+  searchTemperament,
 } from "../../redux/actions/actions";
 import { useState, useEffect } from "react";
-import { searchTemperament } from "../../redux/actions/actions";
-import reset_icon from "../../assets/reset-icon.svg";
+import { GrPowerReset } from "react-icons/gr";
 
 const Filter = ({
   paginate,
@@ -33,6 +33,11 @@ const Filter = ({
     paginate(1);
   };
 
+  const handleFilterCreated = (e) => {
+    dispatch(filterCreated(e.target.value));
+    paginate(1);
+  };
+
   const handleReset = () => {
     document
       .querySelectorAll("input[type=checkbox]")
@@ -42,11 +47,6 @@ const Filter = ({
     dispatch(filterByTemperament([]));
     allTemps();
     allDogs();
-  };
-
-  const handleFilterCreated = (e) => {
-    dispatch(filterCreated(e.target.value));
-    paginate(1);
   };
 
   return (
@@ -68,7 +68,7 @@ const Filter = ({
             name="temperament"
             className={styles.reset}
           >
-            <img width={20} src={reset_icon} alt="reset icon" />
+            <GrPowerReset />
           </button>
         </div>
         <section>
@@ -106,7 +106,7 @@ const Filter = ({
       <section>
         <select
           className={styles.selectFilter}
-          onChange={(e) => handleFilterCreated(e)}
+          onChange={handleFilterCreated}
           defaultValue={"DEFAULT"}
         >
           <option disabled value={"DEFAULT"}>

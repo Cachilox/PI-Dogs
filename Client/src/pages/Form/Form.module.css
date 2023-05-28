@@ -74,7 +74,7 @@ hr {
   cursor: pointer;
 }
 
-span {
+label {
   font-size: 1.1rem;
   display: flex;
   align-items: center;

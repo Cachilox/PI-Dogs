@@ -1,9 +1,21 @@
 import styles from "./OrderBy.module.css";
+import { useDispatch } from "react-redux";
+import {
+  orderByAlphabet,
+  orderWeight,
+} from "../../redux/actions/actions";
 
-const OrderBy = ({ orderBy }) => {
-  const handleClick = (event) => {
-    event.preventDefault();
-    orderBy(event.target.name, event.target.value);
+const OrderBy = () => {
+  const dispatch = useDispatch();
+
+  const handleAlphabetOrder = (event) => {
+    const order = event.target.value;
+    dispatch(orderByAlphabet(order));
+  };
+
+  const handleWeightOrder = (event) => {
+    const order = event.target.value;
+    dispatch(orderWeight(order));
   };
 
   return (
@@ -11,7 +23,11 @@ const OrderBy = ({ orderBy }) => {
       <h2>Order By</h2>
       <hr />
       <span>Alphabetically</span>
-      <select name="Alphabetic" onClick={handleClick} defaultValue={"DEFAULT"}>
+      <select
+        name="Alphabetic"
+        onChange={handleAlphabetOrder}
+        defaultValue={"DEFAULT"}
+      >
         <option disabled value={"DEFAULT"}>
           Select order
         </option>
@@ -19,7 +35,11 @@ const OrderBy = ({ orderBy }) => {
         <option value="Descendent">Descending</option>
       </select>
       <span>In weight order</span>
-      <select name="Weight" onClick={handleClick} defaultValue={"DEFAULT"}>
+      <select
+        name="Weight"
+        onChange={handleWeightOrder}
+        defaultValue={"DEFAULT"}
+      >
         <option disabled value={"DEFAULT"}>
           Select order
         </option>

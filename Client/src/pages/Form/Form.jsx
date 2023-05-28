@@ -6,17 +6,18 @@ import { Link } from "react-router-dom";
 import { postDog } from "../../redux/actions/actions";
 
 import validation from "../../utils/validation";
-import back_icon from "../../assets/back-icon.svg";
+import {BiArrowBack} from "react-icons/bi"
 import FormData from "form-data";
 import axios from "axios";
 import { toast } from "react-toastify";
 
 const Form = () => {
-  const dispatch = useDispatch();
-  const temperaments = useSelector((state) => state.allTemperaments);
-
   const [isDisabled, setIsDisabled] = useState(false);
   const [file, setFile] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const dispatch = useDispatch();
+  const temperaments = useSelector((state) => state.allTemperaments);
 
   const [dogTemperaments, setDogTemperament] = useState([]);
 
@@ -94,58 +95,57 @@ const Form = () => {
   };
 
   const handleSubmit = async (e) => {
+    setLoading(true)
     e.preventDefault();
-
     try {
-      if (Object.keys(validation(dogData, dogTemperaments)).length === 0) {
-        let image = null;
-        if (file) {
-          const cloudinaryUrl =
-            "https://api.cloudinary.com/v1_1/dqiah55rm/image/upload";
-          const cloudinaryID = "icieqqlf";
-          const formData = new FormData();
-          formData.append("file", file);
-          formData.append("upload_preset", cloudinaryID);
-          const res = await axios.post(cloudinaryUrl, formData, {
-            header: {
-              "content-type": "multipart/form-data",
-            },
-          });
-          image = res.data.secure_url;
-        }
-        const dog = {
-          name: dogData.name,
-          image,
-          heightMin: dogData.heightMin,
-          heightMax: dogData.heightMax,
-          weightMin: dogData.weightMin,
-          weightMax: dogData.weightMax,
-          lifeSpanMin: dogData.lifeSpanMin,
-          lifeSpanMax: dogData.lifeSpanMax,
-          temperament: dogTemperaments,
-        };
-        dispatch(postDog(dog));
-        setDogData({
-          name: "",
-          heightMin: "",
-          heightMax: "",
-          weightMin: "",
-          weightMax: "",
-          lifeSpanMin: "",
-          lifeSpanMax: "",
+      let image = null;
+      if (file) {
+        const cloudinaryUrl =
+          "https://api.cloudinary.com/v1_1/dqiah55rm/image/upload";
+        const cloudinaryID = "icieqqlf";
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("upload_preset", cloudinaryID);
+        const res = await axios.post(cloudinaryUrl, formData, {
+          header: {
+            "content-type": "multipart/form-data",
+          },
         });
-        setDogTemperament([]);
-
-        document
-          .querySelectorAll("input[type=checkbox]")
-          .forEach((el) => (el.checked = false));
-        document
-          .querySelectorAll("input[type=file]")
-          .forEach((el) => (el.value = null));
-        setFile(null);
-      } else {
-        window.alert("data is missing");
+        image = res.data.secure_url;
       }
+      const dog = {
+        name: dogData.name,
+        image,
+        heightMin: dogData.heightMin,
+        heightMax: dogData.heightMax,
+        weightMin: dogData.weightMin,
+        weightMax: dogData.weightMax,
+        lifeSpanMin: dogData.lifeSpanMin,
+        lifeSpanMax: dogData.lifeSpanMax,
+        temperament: dogTemperaments,
+      };
+      dispatch(postDog(dog));
+      notify();
+
+      setDogData({
+        name: "",
+        heightMin: "",
+        heightMax: "",
+        weightMin: "",
+        weightMax: "",
+        lifeSpanMin: "",
+        lifeSpanMax: "",
+      });
+      setDogTemperament([]);
+
+      document
+        .querySelectorAll("input[type=checkbox]")
+        .forEach((el) => (el.checked = false));
+      setFile(null);
+      document
+        .querySelectorAll("input[type=file]")
+        .forEach((el) => (el.value = null));
+      setLoading(false)
     } catch (error) {
       console.log(error);
     }
@@ -159,7 +159,7 @@ const Form = () => {
       <div className={styles.back}>
         <Link to="/home">
           <button className={styles.backBtn}>
-            <img width={30} src={back_icon} alt="back_icon" />
+            <BiArrowBack className="arrowBack"/>
           </button>
         </Link>
       </div>
@@ -167,7 +167,7 @@ const Form = () => {
       <hr />
       <div>
         <div className={styles.box}>
-          <span>Name</span>
+          <label htmlFor="name">Name</label>
           <input
             className={`${errors.name && styles.warning} ${styles.inputForm}`}
             onChange={(e) => handleInputChange(e)}
@@ -180,7 +180,7 @@ const Form = () => {
         <p className={styles.error}> {errors.name}</p>
         <div className={styles.contenedor}>
           <div className={styles.box}>
-            <span>Height</span>
+            <label htmlFor="height">Height</label>
             <input
               className={`${
                 errors.height ? styles.warningNumber : styles.number
@@ -207,7 +207,7 @@ const Form = () => {
             />
           </div>
           <div className={styles.box}>
-            <span>Weight</span>
+            <label htmlFor="weight">Weight</label>
             <input
               className={`${
                 errors.weight ? styles.warningNumber : styles.number
@@ -234,7 +234,7 @@ const Form = () => {
             />
           </div>
           <div className={styles.box}>
-            <span>Life span</span>
+            <label htmlFor="lifeSpan">Life span</label>
             <input
               className={`${
                 errors.lifeSpan ? styles.warningNumber : styles.number
@@ -301,9 +301,8 @@ const Form = () => {
         className={`${styles.button}`}
         type="submit"
         disabled={isDisabled}
-        onClick={notify}
       >
-        Create dog
+        {loading ? "Creating..." : "Create Dog"}
       </button>
       <hr></hr>
     </form>

@@ -8,15 +8,13 @@
   background-color: #fff;
   color: #61481C;
   overflow: hidden;
+  border: 2px solid #474747;
 }
 .containerDetail {
   min-height: 80vh;
 }
 
 .backDetail {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   background-color: rgba(250, 170, 78);
   border: 0px;
   border-radius: 100px;
@@ -34,9 +32,9 @@
   top: 2px;
 }
 
-.detail_header img {
+.detail_header .img {
   width: 100%;
-  object-fit: cover;
+  object-fit: contain;
   border-radius: 5px 0 0 5px;
 }
 
@@ -73,6 +71,10 @@
 }
 
 @media (min-width: 768px) {
+  .backDetail {
+    width: 60px;
+    height: 50px;
+  }
   .containerDetail {
     min-height: 80vh;
   }
@@ -173,14 +175,15 @@
     height: 430px;
   }
 
-  .detail_header img {
+  .detail_header .img {
     width: 100%;
-    object-fit: cover;
+    object-fit: fill;
     border-radius: 5px 0 0 5px;
   }
   .detail_temperament h4 {
     font-size: 1.5rem;
   }
+  
   .detail_temperament span {
     font-size: 1.3rem;
   }

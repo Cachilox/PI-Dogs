@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import styles from "./Pagination.module.css";
-import reset_icon from "../../assets/reset-icon.svg";
+import {GrPowerReset} from "react-icons/gr"
 
 const Pagination = ({
   dogsPerPage,
@@ -87,7 +87,7 @@ const Pagination = ({
       />
       <p onClick={handleForward}>&raquo;</p>
       <p onClick={handleReset}>
-        <img className={styles.reset_icon} width={20} src={reset_icon} alt="reset icon" />
+        <GrPowerReset/>
       </p>
     </div>
   );

@@ -11,7 +11,7 @@ import OrderBy from "../../components/OrderBy/OrderBy";
 import Filter from "../../components/Filter/Filter";
 import Loading from "../../components/Loading/Loading";
 
-const Home = ({ allDogs, orderBy, allTemps }) => {
+const Home = ({ allDogs, allTemps }) => {
   const { loading } = useLoading();
   const dispatch = useDispatch();
   const dogs = useSelector((state) => state.dogs);
@@ -34,7 +34,7 @@ const Home = ({ allDogs, orderBy, allTemps }) => {
     <div className={styles.container}>
       <div className={styles.box}>
         <div className={styles.flexFilter}>
-          <OrderBy orderBy={orderBy} />
+          <OrderBy />
           <Filter
             paginate={paginate}
             allDogs={allDogs}

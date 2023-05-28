@@ -6,8 +6,6 @@ import {
   getAllDogs,
   getTemperaments,
   getByBreed,
-  orderByAlphabet,
-  orderWeight,
 } from "./redux/actions/actions";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -45,14 +43,6 @@ function App() {
     allDogs();
   }, [allDogs, allTemps]);
 
-  const orderBy = (name, value) => {
-    if (name === "Alphabetic") {
-      dispatch(orderByAlphabet(value));
-    } else if (name === "Weight") {
-      dispatch(orderWeight(value));
-    }
-  };
-
   return (
     <>
       {show && <Navbar onSearch={onSearch} />}
@@ -62,9 +52,7 @@ function App() {
 
           <Route
             path="/home"
-            element={
-              <Home allDogs={allDogs} orderBy={orderBy} allTemps={allTemps} />
-            }
+            element={<Home allDogs={allDogs} allTemps={allTemps} />}
           />
           <Route path="/create" element={<Form />} />
           <Route path="/detail/:id" element={<DogDetail />} />
