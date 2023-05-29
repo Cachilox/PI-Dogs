@@ -28,8 +28,17 @@ export const getLifeSpanText = (lifeSpanMin, lifeSpanMax) => {
   }
 }
 
-export const getTempText = (temperament) => {
+export const getTempTextCard = (temperament) => {
+  let arr = temperament?.split(",");
+  const firstThree = arr?.slice(0, 3);
+
+  let tempTxt = firstThree?.join(", ");
+  return tempTxt
+}
+
+export const getTempTextDetail = (temperament) => {
   let temp = temperament?.split(",");
   let tempTxt = temp?.join(", ");
   return tempTxt
 }
+

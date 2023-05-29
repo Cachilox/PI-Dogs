@@ -74,8 +74,8 @@ hr {
   cursor: pointer;
 }
 
-label {
-  font-size: 1.1rem;
+.formLabel {
+  font-size: 1.2rem;
   display: flex;
   align-items: center;
   font-weight: 500;

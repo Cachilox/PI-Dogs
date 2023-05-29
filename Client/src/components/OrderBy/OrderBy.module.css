@@ -2,10 +2,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: #FFF7D4;
+  color: #1f1d1d;
   height: 240px;
   width: 150px;
-  background-color: #A47E3B;
+  background-color: #b88d42;
   border-radius: 10px;
   padding: 5px;
   justify-content: space-evenly;
@@ -21,7 +21,7 @@
 }
 
 .orderContainer span {
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 500;
 }
 

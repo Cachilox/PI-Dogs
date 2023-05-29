@@ -28,7 +28,7 @@ const Home = ({ allDogs, allTemps }) => {
 
   useEffect(() => {
     dispatch(getAllDogs());
-  }, [allDogs, dispatch]);
+  }, [dispatch]);
 
   return (
     <div className={styles.container}>

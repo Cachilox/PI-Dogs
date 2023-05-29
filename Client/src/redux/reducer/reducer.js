@@ -35,7 +35,7 @@ const reducer = (state = initialState, { type, payload }) => {
       if (payload.length === 0) {
         return { ...state, dogs: state.allDogs };
       }
-      state.allDogs.forEach((dog) => {
+      state.dogs.forEach((dog) => {
         if (dog.temperament) {
           let cont = 0;
           payload.forEach((e) => {
@@ -105,7 +105,7 @@ const reducer = (state = initialState, { type, payload }) => {
       const copyWeight = [...state.dogs];
       const orderedWeight = copyWeight.sort((a, b) => {
         const weightA = Number(a.weightMin) || 0;
-        const weightB = Number(b.weightMax) || 0;
+        const weightB = Number(b.weightMin) || 0;
 
         if (weightA < weightB) return -1;
         if (weightA > weightB) return 1;

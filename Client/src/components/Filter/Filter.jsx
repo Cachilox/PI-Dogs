@@ -63,39 +63,39 @@ const Filter = ({
             type="search"
             onChange={(e) => setSearchTemp(e.target.value)}
           />
-          <button
-            onClick={handleReset}
-            name="temperament"
-            className={styles.reset}
-          >
-            <GrPowerReset />
-          </button>
+          <div className={styles.reset}>
+            <GrPowerReset className="resetB" onClick={handleReset} />
+          </div>
         </div>
         <section>
           {temperaments.map((temp) => {
             if (checksTemperaments.find((e) => e === temp.name)) {
               return (
                 <div key={temp.id}>
-                  <input
-                    onChange={handleChecksTemp}
-                    key={temp.id}
-                    value={temp.name}
-                    type="checkbox"
-                    checked
-                  ></input>
-                  <span>{temp.name}</span>
+                  <label htmlFor={temp.id}>
+                    <input
+                      onChange={handleChecksTemp}
+                      key={temp.id}
+                      value={temp.name}
+                      type="checkbox"
+                      checked
+                    ></input>
+                    <span>{temp.name}</span>
+                  </label>
                 </div>
               );
             } else {
               return (
                 <div key={temp.id}>
-                  <input
-                    onChange={handleChecksTemp}
-                    key={temp.id}
-                    value={temp.name}
-                    type="checkbox"
-                  ></input>
-                  <span>{temp.name}</span>
+                  <label htmlFor={temp.id}>
+                    <input
+                      onChange={handleChecksTemp}
+                      key={temp.id}
+                      value={temp.name}
+                      type="checkbox"
+                    ></input>
+                    <span>{temp.name}</span>
+                  </label>
                 </div>
               );
             }

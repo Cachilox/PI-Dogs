@@ -167,7 +167,7 @@ const Form = () => {
       <hr />
       <div>
         <div className={styles.box}>
-          <label htmlFor="name">Name</label>
+          <label className={styles.formLabel} htmlFor="name">Name</label>
           <input
             className={`${errors.name && styles.warning} ${styles.inputForm}`}
             onChange={(e) => handleInputChange(e)}
@@ -180,7 +180,7 @@ const Form = () => {
         <p className={styles.error}> {errors.name}</p>
         <div className={styles.contenedor}>
           <div className={styles.box}>
-            <label htmlFor="height">Height</label>
+            <label className={styles.formLabel} htmlFor="height">Height</label>
             <input
               className={`${
                 errors.height ? styles.warningNumber : styles.number
@@ -207,7 +207,7 @@ const Form = () => {
             />
           </div>
           <div className={styles.box}>
-            <label htmlFor="weight">Weight</label>
+            <label className={styles.formLabel} htmlFor="weight">Weight</label>
             <input
               className={`${
                 errors.weight ? styles.warningNumber : styles.number
@@ -234,7 +234,7 @@ const Form = () => {
             />
           </div>
           <div className={styles.box}>
-            <label htmlFor="lifeSpan">Life span</label>
+            <label className={styles.formLabel} htmlFor="lifeSpan">Life span</label>
             <input
               className={`${
                 errors.lifeSpan ? styles.warningNumber : styles.number

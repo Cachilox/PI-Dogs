@@ -4,22 +4,25 @@
   justify-content: center;
   flex-wrap: wrap;
   margin-top: 2.5em;
-  transition:  0.3s ease;
+  transition: 0.3s ease;
 }
 
-.pagination p{
+.pagination p {
   cursor: pointer;
   color: #111;
-  font-size: 1.2em;
+  font-size: 1.3em;
   padding: 8px 16px;
-  background-color: #BF9742;
+  background-color: #bf9742;
   border-radius: 5px;
   font-weight: bold;
   transition: 0.3s ease;
   margin: 0 20px 0;
 }
+
 .pagination p:nth-child(5) {
   margin: 0;
+  display: flex;
+  align-items: center;
 }
 .pagination p img {
   display: flex;
@@ -45,7 +48,7 @@
 }
 
 @media (min-width: 320px) {
-  .pagination p{
+  .pagination p {
     margin: 0 5px 0;
   }
   .inputP {
@@ -54,7 +57,7 @@
 }
 
 @media (min-width: 768px) {
-  .pagination p{
+  .pagination p {
     margin: 0 20px 0;
   }
   .inputP {
