@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { postDog } from "../../redux/actions/actions";
 
 import validation from "../../utils/validation";
-import {BiArrowBack} from "react-icons/bi"
+import { BiArrowBack } from "react-icons/bi";
 import FormData from "form-data";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -20,7 +20,8 @@ const Form = () => {
   const temperaments = useSelector((state) => state.allTemperaments);
 
   const [dogTemperaments, setDogTemperament] = useState([]);
-
+  const [formSubmitted, setFormSubmitted] = useState(false);
+ 
   const [dogData, setDogData] = useState({
     name: "",
     heightMin: "",
@@ -50,10 +51,6 @@ const Form = () => {
     lifeSpan: "",
     temperaments: "",
   });
-
-  useEffect(() => {
-    setIsDisabled(Object.values(errors).some((value) => value !== ""));
-  }, [errors]);
 
   const handleTemperaments = (e) => {
     const { value, checked } = e.target;
@@ -95,8 +92,8 @@ const Form = () => {
   };
 
   const handleSubmit = async (e) => {
-    setLoading(true)
     e.preventDefault();
+    setLoading(true);
     try {
       let image = null;
       if (file) {
@@ -107,7 +104,7 @@ const Form = () => {
         formData.append("file", file);
         formData.append("upload_preset", cloudinaryID);
         const res = await axios.post(cloudinaryUrl, formData, {
-          header: {
+          headers: {
             "content-type": "multipart/form-data",
           },
         });
@@ -145,11 +142,26 @@ const Form = () => {
       document
         .querySelectorAll("input[type=file]")
         .forEach((el) => (el.value = null));
-      setLoading(false)
+
+      setLoading(false);
+
+      setFormSubmitted(true);
     } catch (error) {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    if (
+      formSubmitted ||
+      Object.values(errors).some((error) => error !== "") ||
+      dogTemperaments.length === 0
+    ) {
+      setIsDisabled(true);
+    } else {
+      setIsDisabled(false);
+    }
+  }, [formSubmitted, errors, dogTemperaments]);
 
   return (
     <form
@@ -159,7 +171,7 @@ const Form = () => {
       <div className={styles.back}>
         <Link to="/home">
           <button className={styles.backBtn}>
-            <BiArrowBack className="arrowBack"/>
+            <BiArrowBack className="arrowBack" />
           </button>
         </Link>
       </div>
@@ -167,7 +179,9 @@ const Form = () => {
       <hr />
       <div>
         <div className={styles.box}>
-          <label className={styles.formLabel} htmlFor="name">Name</label>
+          <label className={styles.formLabel} htmlFor="name">
+            Name
+          </label>
           <input
             className={`${errors.name && styles.warning} ${styles.inputForm}`}
             onChange={(e) => handleInputChange(e)}
@@ -180,7 +194,9 @@ const Form = () => {
         <p className={styles.error}> {errors.name}</p>
         <div className={styles.contenedor}>
           <div className={styles.box}>
-            <label className={styles.formLabel} htmlFor="height">Height</label>
+            <label className={styles.formLabel} htmlFor="height">
+              Height
+            </label>
             <input
               className={`${
                 errors.height ? styles.warningNumber : styles.number
@@ -207,7 +223,9 @@ const Form = () => {
             />
           </div>
           <div className={styles.box}>
-            <label className={styles.formLabel} htmlFor="weight">Weight</label>
+            <label className={styles.formLabel} htmlFor="weight">
+              Weight
+            </label>
             <input
               className={`${
                 errors.weight ? styles.warningNumber : styles.number
@@ -234,7 +252,9 @@ const Form = () => {
             />
           </div>
           <div className={styles.box}>
-            <label className={styles.formLabel} htmlFor="lifeSpan">Life span</label>
+            <label className={styles.formLabel} htmlFor="lifeSpan">
+              Life span
+            </label>
             <input
               className={`${
                 errors.lifeSpan ? styles.warningNumber : styles.number
