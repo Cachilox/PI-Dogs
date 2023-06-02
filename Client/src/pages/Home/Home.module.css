@@ -1,3 +1,7 @@
+body {
+  background-color: #ffe4c4;
+}
+
 .container {
   max-width: 1300px;
   min-height: 100vh;
